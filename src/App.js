@@ -4,12 +4,24 @@ import khadi from './khadi.jpg';
 import pimpin from './pimpin.jpg';
 import './App.css';
 
+const dogs = {
+  khadi: {
+    image: khadi,
+    alt: 'dog-khadi'
+  },
+  pimpin: {
+    image: pimpin,
+    alt: 'dog-pimpin'
+  }
+}
+
 function App() {
+  const dog = dogs['khadi'];
   return (
     <div className="App">
       <header className="App-header">
-        <img src={pimpin} className="App-logo" alt="logo" />
         <p>Welcome to the Mini PaaS Demo!</p>
+        <img src={dog.image} className="App-logo" alt={dog.alt} />
         <a>Checkout my site! What dog is this?</a>
       </header>
     </div>
