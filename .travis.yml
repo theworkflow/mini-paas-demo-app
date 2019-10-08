@@ -8,6 +8,7 @@ before_deploy:
 deploy:
   provider: script
   script: DEPLOY_BUCKET=$AWS_S3_BUCKET npm run deploy
+  skip_cleanup: true
   # on:
     # branch: master
     # tags: true
