@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import khadi from './khadi.jpg';
 import pimpin from './pimpin.jpg';
 import './App.css';
@@ -22,7 +21,7 @@ function App() {
       <header className="App-header">
         <p>Welcome to the Mini PaaS Demo!</p>
         <img src={dog.image} className="App-logo" alt={dog.alt} />
-        <a>Checkout my site! What dog is this?</a>
+        <p>Checkout my site! What dog is this?</p>
       </header>
     </div>
   );
