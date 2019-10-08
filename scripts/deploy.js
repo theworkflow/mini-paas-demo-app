@@ -6,8 +6,12 @@ const mime = require('mime');
 const path = require('path');
 const s3diff = require('s3-diff');
 const s3 = new AWS.S3({ region: 'us-east-1' });
+const cloudfront = new AWS.CloudFront();
 
-const { DEPLOY_BUCKET: bucket } = process.env;
+const {
+  DEPLOY_BUCKET: bucket,
+  CLOUDFRONT_DISTRIBUTION_ID: distro
+} = process.env;
 
 const localFolder = path.resolve(__dirname, '..', 'build');
 
@@ -33,7 +37,7 @@ s3diff({
     remove(data)
       .then(() => update(data))
       .then(() => add(data))
-      // .then(() => doInvalidation())
+      .then(() => doInvalidation())
       .then(() => {
         console.log('Finished uploading');
       });
@@ -75,4 +79,28 @@ function upload(file, cb) {
     CacheControl: cache,
     ACL: 'public-read'
   }, () => cb());
+}
+
+function doInvalidation() {
+  const params = {
+    DistributionId: distro,
+    InvalidationBatch: {
+      CallerReference: `INVALIDATION-${new Date().getTime()}`,
+      Paths: {
+        Quantity: 1,
+        Items: [
+          '/*'
+        ]
+      }
+    }
+  };
+
+  cloudfront.createInvalidation(params, function(err, data) {
+    if (err) {
+      console.error(err, err.stack);
+      process.exit(1);
+    } else {
+      console.log(data);
+    }
+  });
 }

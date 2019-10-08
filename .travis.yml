@@ -7,11 +7,8 @@ before_deploy:
   - npm run build
 deploy:
   provider: script
-  script: DEPLOY_BUCKET=$AWS_S3_BUCKET npm run deploy
+  script: DEPLOY_BUCKET=$AWS_S3_BUCKET CLOUDFRONT_DISTRIBUTION_ID=$AWS_CLOUDFRONT_DISTRO_ID npm run deploy
   skip_cleanup: true
   # on:
     # branch: master
     # tags: true
-after_deploy:
-  - pip install --user awscli
-  - aws cloudfront create-invalidation --distribution-id $AWS_CLOUDFRONT_DISTRO_ID --paths /
