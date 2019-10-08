@@ -15,7 +15,7 @@ const dogs = {
 }
 
 function App() {
-  const dog = dogs['khadi'];
+  const dog = dogs['pimpin'];
   return (
     <div className="App">
       <header className="App-header">
