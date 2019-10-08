@@ -15,4 +15,7 @@ deploy:
   acl: private
   on:
     branch: master
-    tags: true
+    # tags: true
+after_deploy:
+  - pip install --user awscli
+  - aws cloudfront create-invalidation --distribution-id $AWS_CLOUDFRONT_DISTRO_ID --paths /
