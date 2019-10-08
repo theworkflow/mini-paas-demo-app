@@ -6,11 +6,13 @@ import './App.css';
 const dogs = {
   khadi: {
     image: khadi,
-    alt: 'dog-khadi'
+    alt: 'dog-khadi',
+    name: 'Khadijah'
   },
   pimpin: {
     image: pimpin,
-    alt: 'dog-pimpin'
+    alt: 'dog-pimpin',
+    name: 'Pippin'
   }
 }
 
@@ -21,7 +23,7 @@ function App() {
       <header className="App-header">
         <p>Welcome to the Mini PaaS Demo!</p>
         <img src={dog.image} className="App-logo" alt={dog.alt} />
-        <p>Checkout my site! What dog is this?</p>
+        <p>Checkout my site! What dog is this? Its {dog.name}!</p>
       </header>
     </div>
   );
